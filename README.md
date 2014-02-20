@@ -46,11 +46,11 @@ snakemake -n
 snakemake --summary
 snakemake -n --printshellcmds
 snakemake -n --dag
+module load graphviz
 snakamake -n --forceall --dag | dot -Tsvg > dag.svg
 snakemake 
 snakemake cleanup
 snakemake -j 8
-...
 snakemake cleanup
 qsub -l nodes=1:gpfs submit.sh
 ```
