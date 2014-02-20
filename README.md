@@ -35,5 +35,8 @@ This loads the python/3.3.2 libraries, including the `snakemake` executable.
 snakemake -n
 snakemake -n --printshellcmds
 snakemake -n --dag
-snakamake -n --dag | dot -Tpdf > dag.pdf
+snakamake -n --forceall --dag | dot -Tsvg > dag.svg
+snakemake 
+snakemake cleanup
+snakemake -j 8
 ```
