@@ -7,6 +7,7 @@ SAMPLES = [os.path.basename(fname).split('.')[0] for fname in glob.glob('bam/*.b
 include: 'bampost.snk'
 
 rule final: 
+    params: batch='-l nodes=1:gpfs'
     input: expand('bam/{sample}.bam.bai',sample=SAMPLES)
 
 rule cleanup:
