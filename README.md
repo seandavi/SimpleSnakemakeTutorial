@@ -1,6 +1,13 @@
-### What is this?
+### Getting started. 
 
-This repository contains a simple set of files for playing with Snakemake on the NIH Biowulf cluster.
+This repository contains a simple set of files for playing with Snakemake on the NIH Biowulf cluster.  Clone this repository into a convenient place in your data directory:
+
+```
+git clone https://github.com/seandavi/SimpleSnakemakeTutorial.git
+```
+
+This will create a directory called `SimpleSnakemakeTutorial` that contains:
+
 ```
 .
 |-- README.md
@@ -22,14 +29,17 @@ This repository contains a simple set of files for playing with Snakemake on the
 `-- submit.sh
 ```
 
+
 ### Example snakemake commands:
-Before getting started, you'll need to run:
+Before working with snakemake, you will need to run:
 
 ```
 module load python/3.3.2
 ```
 
-This loads the python/3.3.2 libraries, including the `snakemake` executable.
+This loads the python/3.3.2 libraries, including the `snakemake` executable.  Note that this will also change the python executable to be python version 3.3.2.  To change back, do `module unload python/3.3.2`.
+
+See the [snakemake documentation](https://bitbucket.org/johanneskoester/snakemake/wiki/Home) for more details, but a few quick commands can get you started.
 
 ```
 snakemake -n
@@ -39,4 +49,7 @@ snakamake -n --forceall --dag | dot -Tsvg > dag.svg
 snakemake 
 snakemake cleanup
 snakemake -j 8
+...
 ```
+
+
