@@ -1,0 +1,45 @@
+# requires config.PICARD_BASE='/usr/local/apps/picard/1.94'
+# requires config.REFERENCE='/path/to/fastq'
+
+rule indexbam:
+    """Index a bam file using bamtools, creating .bam.bai"""
+    input: "{base}.bam"
+    output: "{base}.bam.bai"
+    params: batch = "-l nodes=1:gpfs"
+    threads: 1
+    shell: "module load bamtools; bamtools index -in {input}"
+
+rule picardMarkDuplicates:
+    """Picard Mark Duplicates, and also produces a .metrics file of the same base name"""
+    threads: 1
+    input: '{base}.bam','{base}.bam.bai'
+    output: bam='{base}.md.bam',metrics='{base}.dupmetrics'
+    params: batch="-l nodes=1:gpfs",PICARD_BASE=config.PICARD_BASE
+    shell: """java -jar {params.PICARD_BASE}/MarkDuplicates.jar \
+              AS=true \
+              M={output.metrics} O={output.bam} I={input[0]} \
+              REMOVE_DUPLICATES=false \
+              VALIDATION_STRINGENCY=SILENT"""
+
+rule picardAlignmentSummaryMetrics:
+    """Picard Alignment Summary Metrics"""
+    input: "{base}.bam","{base}.bam.bai"
+    output: "{base}.alignment.metrics.txt"
+    params: batch="-l nodes=1:gpfs",
+            PICARD_BASE=config.PICARD_BASE,
+            REFERENCE=config.REFERENCE
+    threads: 1
+    shell: """java -jar {params.PICARD_BASE}/CollectAlignmentSummaryMetrics.jar \
+              R={params.REFERENCE} I={input[0]} O={output} VALIDATION_STRINGENCY=SILENT"""
+
+
+
+
+
+
+
+
+
+
+
+
