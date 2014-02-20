@@ -43,6 +43,7 @@ See the [snakemake documentation](https://bitbucket.org/johanneskoester/snakemak
 
 ```
 snakemake -n
+snakemake --summary
 snakemake -n --printshellcmds
 snakemake -n --dag
 snakamake -n --forceall --dag | dot -Tsvg > dag.svg
@@ -50,6 +51,8 @@ snakemake
 snakemake cleanup
 snakemake -j 8
 ...
+snakemake cleanup
+qsub -l nodes=1:gpfs submit.sh
 ```
 
 
