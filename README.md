@@ -90,3 +90,5 @@ To submit the entire snakemake workflow as a batch job (no interactive node requ
 ```
 qsub -l nodes=1 submit.sh
 ```
+
+An example `submit.sh` file is included in this repository.
