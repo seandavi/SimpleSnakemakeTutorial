@@ -2,6 +2,11 @@
 #rule: {job}
 #input: {job.input}
 #output: {job.output}
+
+#PBS -o {job.output[0]}.log
+#PBS -e {job.output[0]}.log
+#PBS -j oe
+
 cd $PBS_O_WORKDIR
 module load python/3.3.2
 snakemake --snakefile {self.workflow.snakefile} \
